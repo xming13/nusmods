@@ -9,6 +9,7 @@ var ModulesListingView = require('./ModulesListingView');
 var NUSMods = require('../../nusmods');
 var _ = require('underscore');
 var template = require('../templates/modules.hbs');
+require('bootstrap/dropdown');
 
 module.exports = Marionette.LayoutView.extend({
   template: template,
