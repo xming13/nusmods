@@ -1,0 +1,14 @@
+{{#if loggedIn}}
+  <div>
+    <img src="http://graph.facebook.com/{{facebookId}}/picture?type=normal" class="img-rounded img-responsive">
+    <h3>{{name}}</h3>
+  </div>
+  <hr>
+  <button class="btn btn-info js-fb-connect">
+    Logout of Facebook
+  </button> 
+{{else}}
+  <button class="btn btn-info js-fb-connect">
+    Connect to Facebook
+  </button> 
+{{/if}}

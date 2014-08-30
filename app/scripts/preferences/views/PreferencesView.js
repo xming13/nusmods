@@ -1,14 +1,20 @@
 'use strict';
 
 var $ = require('jquery');
+var Backbone = require('backbone');
 var Marionette = require('backbone.marionette');
 var _ = require('underscore');
 var localforage = require('localforage');
 var template = require('../templates/preferences.hbs');
 var themePicker = require('../../common/themes/themePicker');
+var ProfileView = require('./ProfileView');
+var user = require('../../common/utils/user');
 
 module.exports = Marionette.LayoutView.extend({
   template: template,
+  regions: {
+    profileRegion: '#profile',
+  },
   ui: {
     faculty: '#faculty',
     student: 'input:radio[name="student-radios"]',
@@ -25,7 +31,7 @@ module.exports = Marionette.LayoutView.extend({
       });
     });
 
-    localforage.getItem('ivle:ivleModuleHistory', function (value) {
+    localforage.getItem('user:ivle:ivleModuleHistory', function (value) {
       if (value) {
         $('#ivle-status-success').removeClass('hidden');
       }
@@ -38,6 +44,19 @@ module.exports = Marionette.LayoutView.extend({
     'change @ui.faculty, @ui.student, @ui.mode, @ui.theme': 'updatePreference',
     'keydown': 'toggleTheme',
     'click .connect-ivle': 'connectIvle'
+  },
+  onShow: function () {
+    var that = this;
+    user.getFacebookLoginStatus(function (response) {
+      var profileModel = new Backbone.Model({
+        loggedIn: response.loggedIn,
+        name: response.name,
+        facebookId: response.facebookId
+      });
+      that.profileRegion.show(new ProfileView({
+        model: profileModel
+      }));
+    });
   },
   connectIvle: function () {
     var that = this;
@@ -91,7 +110,7 @@ module.exports = Marionette.LayoutView.extend({
     );
   },
   saveModuleHistory: function (moduleHistory) {
-    localforage.setItem('ivle:ivleModuleHistory', moduleHistory.Results);
+    localforage.setItem('user:ivle:ivleModuleHistory', moduleHistory.Results);
     $('#ivle-status-success').removeClass('hidden');
     $('#ivle-status-loading').addClass('hidden');
   },
