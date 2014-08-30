@@ -1,18 +1,24 @@
 'use strict';
 
 var $ = require('jquery');
+var Backbone = require('backbone');
 var Marionette = require('backbone.marionette');
 var _ = require('underscore');
 var localforage = require('localforage');
 var template = require('../templates/preferences.hbs');
 var themePicker = require('../../common/themes/themePicker');
 var config = require('../../common/config');
-
 var preferencesNamespace = config.namespaces.preferences + ':';
 var ivleNamespace = config.namespaces.ivle + ':';
+var ProfileView = require('./ProfileView');
+var user = require('../../common/utils/user');
+
 
 module.exports = Marionette.LayoutView.extend({
   template: template,
+  regions: {
+    profileRegion: '#profile',
+  },
   ui: {
     faculty: '#faculty',
     student: 'input:radio[name="student-radios"]',
@@ -42,6 +48,19 @@ module.exports = Marionette.LayoutView.extend({
     'change @ui.faculty, @ui.student, @ui.mode, @ui.theme': 'updatePreference',
     'keydown': 'toggleTheme',
     'click .connect-ivle': 'connectIvle'
+  },
+  onShow: function () {
+    var that = this;
+    user.getFacebookLoginStatus(function (response) {
+      var profileModel = new Backbone.Model({
+        loggedIn: response.loggedIn,
+        name: response.name,
+        facebookId: response.facebookId
+      });
+      that.profileRegion.show(new ProfileView({
+        model: profileModel
+      }));
+    });
   },
   connectIvle: function () {
     var that = this;
