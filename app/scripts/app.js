@@ -122,6 +122,7 @@ App.on('start', function () {
   require('./modules');
   require('./timetable');
   // require('ivle');
+  require('./venues');
   require('./preferences');
 
   // footer modules
