@@ -119,8 +119,8 @@ App.on('start', function () {
   });
 
   // header modules
-  require('./modules');
   require('./timetable');
+  require('./modules');
   // require('ivle');
   require('./venues');
   require('./preferences');
