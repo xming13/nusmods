@@ -80,6 +80,8 @@
     "bootstrap/button": "./app/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js",
     "bootstrap/collapse": "./app/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js",
     "bootstrap/dropdown": "./app/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js",
+    "bootstrap/popover": "./app/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js",
+    "bootstrap/tooltip": "./app/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js",
     "bootstrap/transition": "./app/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js",
     "jquery-ui-touch-punch": "./app/bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js",
     "jquery-ui/core": "./app/bower_components/jquery.ui/ui/core.js",
