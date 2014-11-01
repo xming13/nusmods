@@ -126,6 +126,7 @@ App.on('start', function () {
   require('./modules');
   // require('ivle');
   require('./friends');
+  require('./collab');
   require('./venues');
   require('./nusessities');
   require('./preferences');
