@@ -23,6 +23,7 @@ module.exports = {
     }(document, 'script', 'facebook-jssdk'));    
   },
   getFacebookLoginStatus: function (callback) {
+    var that = this;
     if (!callback) {
       return;
     }
@@ -30,11 +31,24 @@ module.exports = {
       if (response.status === 'connected') {
         localforage.getItem('user:fb:name', function (name) {
           var facebookId = FB.getUserID();
-          callback({
-            loggedIn: true, 
-            name: name,
-            facebookId: facebookId
-          });
+          if (!name) {
+            FB.api('/me', function (response) {
+              var name = response.name;
+              localforage.setItem('user:fb:name', name);
+              localforage.setItem('user:fb:id', facebookId);
+              callback({
+                loggedIn: true, 
+                name: response.name,
+                facebookId: facebookId
+              });
+            });
+          } else {
+            callback({
+              loggedIn: true, 
+              name: name,
+              facebookId: facebookId
+            });
+          }
         });
       } else {
         callback({loggedIn: false});
@@ -56,7 +70,7 @@ module.exports = {
         FB.login(function (response) {
           if (response.status === 'connected') {
             // Logged into your app and Facebook.
-            FB.api('/me', function(response) {
+            FB.api('/me', function (response) {
               var name = response.name;
               var facebookId = FB.getUserID();
               localforage.setItem('user:fb:name', name);
@@ -79,7 +93,7 @@ module.exports = {
       return;
     }
     localforage.getItem('user:fb:name', function (data) {
-      return data;
+      callback(data);
     });
   }
 }
