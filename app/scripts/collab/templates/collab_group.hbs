@@ -2,12 +2,53 @@
   <div class="col-md-12">
     <h1>{{group.name}}</h1>
     <hr>
-    <div>
-      <ul>
-        {{#each group.members}}
-          <li>{{this.name}}</li>
-        {{/each}}
-      </ul>
+    <div class="row">
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Next Meeting</h3>
+              </div>
+              <div class="panel-body">
+                
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Members</h3>
+              </div>
+              <div class="panel-body">
+                <div>
+                  {{#each group.members}}
+                    <h5>
+                      <img class="img-rounded" src="http://graph.facebook.com/{{this.fbid}}/picture" width="40"> &nbsp; 
+                      {{this.name}}
+                    </h5>
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Group Chat</h3>
+          </div>
+          <div class="panel-body">
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

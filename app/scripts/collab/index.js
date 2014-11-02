@@ -18,28 +18,28 @@ function init () {
       name: 'CS3240 Project',
       slug: 'cs3240-project',
       members: [
-        {name: 'Yang Shun'},
-        {name: 'Darren' },
-        {name: 'Poo Siang'},
-        {name: 'Joan'}
+        {fbid: 'yangshun'},
+        {fbid: 'absolutlala' },
+        {fbid: 'khor.poosiang'},
+        {fbid: 'shana.nietono'}
       ]
     },
     {
       name: 'CS4243 Project',
       slug: 'cs4243-project',
       members: [
-        {name: 'Yang Shun'},
-        {name: 'Jenna'},
-        {name: 'Minh Tu'},
-        {name: 'Hieu'}
+        {fbid: 'yangshun'},
+        {fbid: 'jennmnna'},
+        {fbid: 'le.m.tu'},
+        {fbid: 'ngtrhieu0011'}
       ]
     },
     {
       name: 'CS4249 Assignment',
       slug: 'cs4249-assignment',
       members: [
-        {name: 'Yang Shun'},
-        {name: 'Hieu'}
+        {fbid: 'yangshun'},
+        {fbid: 'ngtrhieu0011'}
       ]
     }
   ];
@@ -55,7 +55,15 @@ var controller = {
       if (!groupsList) {
         groupsList = init();
       }
-      App.mainRegion.show(new CollabGroupsView(groupsList));  
+      localforage.getItem('timetable:friends').then(function (friendsList) {
+        _.each(groupsList, function (group) {
+          group.members = _.map(group.members, function (member) {
+            var member = _.findWhere(friendsList, {fbid: member.fbid});
+            return member;
+          });
+        });
+        App.mainRegion.show(new CollabGroupsView(groupsList));
+      });
     });
   },
   showGroup: function (slug) {
@@ -66,10 +74,16 @@ var controller = {
         groupsList = init();
       }
       var group = _.findWhere(groupsList, {slug: slug});
-      var groupModel = new Backbone.Model({
-        group: group,
+      localforage.getItem('timetable:friends').then(function (friendsList) {
+        group.members = _.map(group.members, function (member) {
+          var member = _.findWhere(friendsList, {fbid: member.fbid});
+          return member;
+        });
+        var groupModel = new Backbone.Model({
+          group: group,
+        });
+        App.mainRegion.show(new CollabGroupView({model: groupModel}));  
       });
-      App.mainRegion.show(new CollabGroupView({model: groupModel}));  
     });
   }
 };
