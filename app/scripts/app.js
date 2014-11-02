@@ -109,7 +109,7 @@ App.reqres.setHandler('deleteBookmark', function (id) {
 });
 
 user.initialize();
-user.getFacebookLoginStatus();
+
 
 App.on('start', function () {
   var AppView = require('./common/views/AppView');

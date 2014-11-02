@@ -876,6 +876,29 @@ colgroup.hover {
   }
 }
 
+// Collab
+.nm-collab-message-container {
+  height: 600px;
+}
+
+.nm-collab-message {
+  height: 100%;
+  position: relative;
+}
+
+.nm-collab-message-content-container {
+  height: calc(100% - 91px);
+  overflow: scroll;
+}
+
+.nm-collab-message-input-container {
+  background-color: #eee;
+  bottom: 0;
+  padding: 10px;
+  position: absolute;
+  width: 100%;
+}
+
 // Preferences
 #preferences {
   user-select: none;

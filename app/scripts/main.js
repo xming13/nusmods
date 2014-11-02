@@ -1,6 +1,8 @@
 'use strict';
 
 var Backbone = require('backbone');
+var Firebase = require('firebase');
+
 var $ = require('jquery');
 Backbone.$ = $;
 var Raven = require('raven');

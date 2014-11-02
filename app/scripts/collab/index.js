@@ -18,28 +18,28 @@ function init () {
       name: 'CS3240 Project',
       slug: 'cs3240-project',
       members: [
-        {fbid: 'yangshun'},
-        {fbid: 'absolutlala' },
-        {fbid: 'khor.poosiang'},
-        {fbid: 'shana.nietono'}
+        {fbid: '558978353'},
+        {fbid: '631573134' },
+        {fbid: '675532440'},
+        {fbid: '100001166373215'}
       ]
     },
     {
       name: 'CS4243 Project',
       slug: 'cs4243-project',
       members: [
-        {fbid: 'yangshun'},
-        {fbid: 'jennmnna'},
-        {fbid: 'le.m.tu'},
-        {fbid: 'ngtrhieu0011'}
+        {fbid: '558978353'},
+        {fbid: '550789610'},
+        {fbid: '100000005101505'},
+        {fbid: '1711521631'}
       ]
     },
     {
       name: 'CS4249 Assignment',
       slug: 'cs4249-assignment',
       members: [
-        {fbid: 'yangshun'},
-        {fbid: 'ngtrhieu0011'}
+        {fbid: '558978353'},
+        {fbid: '1711521631'}
       ]
     }
   ];
