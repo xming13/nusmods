@@ -16,6 +16,7 @@ module.exports = Marionette.LayoutView.extend({
   },
   template: template,
   regions: {
+    meetingDetailsRegion: '.nm-collab-meeting-details',
     messagesRegion: '.nm-collab-message-content'
   },
   ui: {
@@ -48,6 +49,15 @@ module.exports = Marionette.LayoutView.extend({
       collection: this.messagesCollection
     });
     that.messagesRegion.show(this.messageView);
+
+    var CollabMeetingDetailsView = require('./CollabMeetingDetailsView');
+    var groupModel = new Backbone.Model({
+      group: group
+    })
+    this.meetingDetailsView = new CollabMeetingDetailsView({
+      model: groupModel
+    });
+    this.meetingDetailsRegion.show(this.meetingDetailsView);
   },
   enterMessage: function (e) {
     if (e.which === 13) {
