@@ -877,6 +877,24 @@ colgroup.hover {
 }
 
 // Collab
+.nm-collab-container {
+  margin-top: -15px;
+}
+
+.nm-collab-title-section {
+  background: linear-gradient(0deg, #485563 10%, #29323c 90%); /* W3C */
+  height: 100px;
+  margin-top: -20px;
+  margin-bottom: 15px;
+  width: 100%;
+  text-align: center;
+  h1 {
+    color: #fff;
+    line-height: 100px;
+  }
+}
+
+
 .nm-collab-message-container {
   height: 600px;
 }

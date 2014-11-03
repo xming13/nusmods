@@ -32,5 +32,6 @@ module.exports = Marionette.LayoutView.extend({
     that.groupsListCollection.on('change', function () {
       that.groupsListView.render();
     });
+    $('img').tooltip();
   }
 });

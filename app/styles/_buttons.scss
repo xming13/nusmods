@@ -9,4 +9,8 @@
   background-color: transparent;
   border-color: $brand-primary;
   color: $brand-primary;
+  &:hover {
+    background-color: $brand-primary;
+    color: #fff;
+  }
 }
