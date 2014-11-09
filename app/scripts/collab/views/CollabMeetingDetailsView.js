@@ -20,7 +20,7 @@ module.exports = Marionette.LayoutView.extend({
     var that = this;
     var group = this.model.get('group');
 
-    var detailsRef = new Firebase('https://nusmods-collab.firebaseio.com/details/' + group.slug);
+    var detailsRef = new Firebase('https://nusmods-collab.firebaseio.com/groups/' + group.slug + '/meeting');
     this.detailsRef = detailsRef;
     var notFired = true;
     detailsRef.on('value', function (snapshot) {
@@ -46,10 +46,8 @@ module.exports = Marionette.LayoutView.extend({
   updateMeetingDetails: function () {
     console.log('updateMeetingDetails');
 
-    this.detailsRef.update({
-      date: $('.nm-collab-meeting-details-date').html(),
-      time: $('.nm-collab-meeting-details-time').html(),
-      venue: $('.nm-collab-meeting-details-venue').html()
-    })
+    this.detailsRef.child('date').set($('.nm-collab-meeting-details-date').html());
+    this.detailsRef.child('time').set($('.nm-collab-meeting-details-time').html());
+    this.detailsRef.child('venue').set($('.nm-collab-meeting-details-venue').html());
   }
 });
