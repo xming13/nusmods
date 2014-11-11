@@ -1,7 +1,10 @@
 'use strict';
 
 var App = require('../app');
+var Backbone = require('backbone');
 var Marionette = require('backbone.marionette');
+var FriendModel = require('./models/FriendModel');
+var _ = require('underscore');
 
 var navigationItem = App.request('addNavigationItem', {
   name: 'Friends',
@@ -73,7 +76,14 @@ var controller = {
       }
       var FriendsView = require('./views/FriendsView');
       navigationItem.select();
-      App.mainRegion.show(new FriendsView());
+
+      var friendsModel = _.map(friendsList, function (friend) {
+        return new FriendModel(friend);
+      });
+      var friendsListCollection = new Backbone.Collection(friendsModel);
+      App.mainRegion.show(new FriendsView({
+        collection: friendsListCollection
+      }));
     });
   }
 };

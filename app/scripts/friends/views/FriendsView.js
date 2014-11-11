@@ -35,30 +35,26 @@ module.exports = Marionette.LayoutView.extend({
   },
   onShow: function () {
     var that = this;
-    localforage.getItem('timetable:friends', function (data) {
-      var friendsList = _.map(data, function (friend) {
-        return new FriendModel(friend);
-      });
-      that.friendsListCollection = new Backbone.Collection(friendsList);
-      that.friendsListView = new FriendsListView({collection: that.friendsListCollection});
-      that.friendsListRegion.show(that.friendsListView);
 
+    that.friendsListCollection = this.collection;
+    that.friendsListView = new FriendsListView({collection: that.friendsListCollection});
+    that.friendsListRegion.show(that.friendsListView);
+
+    var friendsSelectedList = that.friendsListCollection.where({selected: true});
+    that.friendsSelectedListView = new FriendsSelectedListView();
+    that.friendsSelectedListView.collection = new Backbone.Collection(friendsSelectedList);
+    that.friendsSelectedListRegion.show(that.friendsSelectedListView);
+    that.showSelectedFriendsList();
+    that.updateDisplayedTimetable();
+
+    that.friendsListCollection.on('change', function () {
       var friendsSelectedList = that.friendsListCollection.where({selected: true});
-      that.friendsSelectedListView = new FriendsSelectedListView();
       that.friendsSelectedListView.collection = new Backbone.Collection(friendsSelectedList);
-      that.friendsSelectedListRegion.show(that.friendsSelectedListView);
-      that.showSelectedFriendsList();
       that.updateDisplayedTimetable();
+      that.showSelectedFriendsList();
+      that.friendsListView.render();
+    });    
 
-      that.friendsListCollection.on('change', function () {
-        var friendsSelectedList = that.friendsListCollection.where({selected: true});
-        that.friendsSelectedListView.collection = new Backbone.Collection(friendsSelectedList);
-        that.updateDisplayedTimetable();
-        that.showSelectedFriendsList();
-        that.friendsListView.render();
-      });
-
-    });
     this.ui.addButton.popover({
       html: true,
       placement: 'bottom',
