@@ -122,6 +122,7 @@ App.on('start', function () {
   require('./timetable');
   require('./modules');
   // require('ivle');
+  require('./nusessities');
   require('./friends');
   require('./venues');
   require('./preferences');
