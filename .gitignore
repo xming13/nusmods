@@ -8,4 +8,3 @@ vendor
 app/vendor
 dist
 node_modules
-config.json
