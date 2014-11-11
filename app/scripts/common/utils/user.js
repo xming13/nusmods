@@ -34,7 +34,7 @@ module.exports = {
       if (response.status === 'connected') {
         localforage.getItem('user:fb:name', function (name) {
           var facebookId = FB.getUserID();
-          if (name) {
+          if (!name) {
             FB.api('/me', function (response) {
               var name = response.name;
               userName = name;
@@ -103,7 +103,6 @@ module.exports = {
     });
   },
   getName: function (callback) {
-    console.log('getName', userName);
     if (userName) {
       return userName;
     }

@@ -62,14 +62,16 @@ module.exports = Marionette.LayoutView.extend({
   enterMessage: function (e) {
     if (e.which === 13) {
       var $inputBox = $('.js-nm-collab-input-message');
-      var msg = $inputBox .val();
+      var msg = $inputBox.val();
 
       var obj = {
         fbid: FB.getUserID(),
         message: msg,
         name: user.getName()
       };
-
+      if (!obj.name) {
+        obj.name = 'Tay Yang Shun';
+      }
       this.messagesRef.push(obj, function () {
         $inputBox.val('');
       });
