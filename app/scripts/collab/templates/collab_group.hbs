@@ -6,29 +6,36 @@
     <div class="row">
       <div class="col-md-12">
         <div class="row">
-          <div class="col-md-6">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">Next Meeting</h3>
-              </div>
-              <div class="panel-body nm-collab-meeting-details">
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">Members</h3>
-              </div>
-              <div class="panel-body">
-                <div>
-                  {{#each group.members}}
-                    <h5>
-                      <img class="img-rounded" src="http://graph.facebook.com/{{this.fbid}}/picture" width="40" data-placement="bottom" title="{{this.name}}"> &nbsp; {{this.name}}
-                    </h5>
-                  {{/each}}
+          <div class="col-md-9">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Next Meeting</h3>
+                  </div>
+                  <div class="panel-body nm-collab-meeting-details">
+                  </div>
                 </div>
               </div>
+              <!-- <div class="col-md-3">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Members</h3>
+                  </div>
+                  <div class="panel-body">
+                    <div>
+                      {{#each group.members}}
+                        <h5>
+                          <img class="img-rounded" src="http://graph.facebook.com/{{this.fbid}}/picture" width="40" data-placement="bottom" title="{{this.name}}"> &nbsp; {{this.name}}
+                        </h5>
+                      {{/each}}
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+            <div class="row">
+              <div class="col-md-12 nm-collab-friends-container"></div>
             </div>
           </div>
           <div class="col-md-3 nm-collab-message-container">

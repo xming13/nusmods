@@ -9,6 +9,7 @@ var localforage = require('localforage');
 var template = require('../templates/collab_group.hbs');
 var MessageView = require('./MessageView');
 var user = require('../../common/utils/user');
+var FriendsView = require('../../friends/views/FriendsView');
 
 module.exports = Marionette.LayoutView.extend({
   initialize: function () {
@@ -17,7 +18,8 @@ module.exports = Marionette.LayoutView.extend({
   template: template,
   regions: {
     meetingDetailsRegion: '.nm-collab-meeting-details',
-    messagesRegion: '.nm-collab-message-content'
+    messagesRegion: '.nm-collab-message-content',
+    friendsRegion: '.nm-collab-friends-container'
   },
   ui: {
     
@@ -58,6 +60,12 @@ module.exports = Marionette.LayoutView.extend({
       model: groupModel
     });
     this.meetingDetailsRegion.show(this.meetingDetailsView);
+
+    localforage.getItem('timetable:friends').then(function (friendsList) {
+      that.friendsRegion.show(new FriendsView({
+        collection: that.model.get('groupMembers')
+      }));
+    });
   },
   enterMessage: function (e) {
     if (e.which === 13) {

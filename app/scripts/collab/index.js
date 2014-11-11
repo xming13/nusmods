@@ -5,6 +5,7 @@ var Backbone = require('backbone');
 var Marionette = require('backbone.marionette');
 var _ = require('underscore');
 var localforage = require('localforage');
+var FriendModel = require('../friends/models/FriendModel');
 
 var navigationItem = App.request('addNavigationItem', {
   name: 'Collab',
@@ -48,8 +49,13 @@ var controller = {
           var member = _.findWhere(friendsList, {fbid: group.members[key].fbid});
           return member;
         });
+        var groupMembersModel = _.map(group.members, function (friend) {
+          return new FriendModel(friend);
+        });
+        var groupMembersCollection = new Backbone.Collection(groupMembersModel);
         var groupModel = new Backbone.Model({
           group: group,
+          groupMembers: groupMembersCollection
         });
         App.mainRegion.show(new CollabGroupView({model: groupModel}));  
       });
