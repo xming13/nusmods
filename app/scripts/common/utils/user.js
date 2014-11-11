@@ -50,16 +50,20 @@ module.exports = {
             });
           } else {
             userName = name;
-            console.log(that.name)
-            callback({
-              loggedIn: true, 
-              name: name,
-              facebookId: facebookId
-            });
+            that.name = name;
+            if (callback) {
+              callback({
+                loggedIn: true, 
+                name: name,
+                facebookId: facebookId
+              });
+            }
           }
         });
       } else {
-        callback({loggedIn: false});
+        if (callback) {
+          callback({loggedIn: false});
+        }
       }
     });
   },
