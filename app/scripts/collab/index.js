@@ -24,7 +24,6 @@ var controller = {
         _.each(groupsList, function (group) {
           group.members = _.values(group.members);
           group.members = _.map(group.members, function (member) {
-            console.log(member.fbid);
             var member = _.findWhere(friendsList, {fbid: member.fbid});
             return member;
           });
@@ -44,8 +43,9 @@ var controller = {
       var groupsList = _.values(snapshot.val());
       var group = _.findWhere(groupsList, {slug: slug});
       localforage.getItem('timetable:friends').then(function (friendsList) {
-        group.members = _.map(group.members, function (member) {
-          var member = _.findWhere(friendsList, {fbid: member.fbid});
+        var keys = _.keys(group.members);
+        group.members = _.map(keys, function (key) { 
+          var member = _.findWhere(friendsList, {fbid: group.members[key].fbid});
           return member;
         });
         var groupModel = new Backbone.Model({

@@ -35,7 +35,7 @@ module.exports = Marionette.LayoutView.extend({
     this.messagesCollection = new Backbone.Collection([]);
 
     function scrollToBottom() {
-      $('.nm-collab-message-content-container').animate({ scrollTop: 999999 }, "slow");
+      $('.nm-collab-message-content-container').animate({ scrollTop: 999999 }, 'slow');
     }
     messagesQuery.on('child_added', function (snapshot) {
       var data = snapshot.val();
