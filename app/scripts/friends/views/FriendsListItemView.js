@@ -13,7 +13,7 @@ module.exports = Marionette.LayoutView.extend({
   events: {
     'click': 'selectFriend',
     'click .js-nm-friends-delete': 'deleteFriendTimetable',
-    'change .js-nm-friends-select-checkbox': 'toggleFriendSelection'
+    'click .js-nm-friends-select-checkbox': 'toggleFriendSelection'
   },
   onShow: function () {  
     
