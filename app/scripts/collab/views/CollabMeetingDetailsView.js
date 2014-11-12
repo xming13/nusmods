@@ -6,6 +6,7 @@ var Backbone = require('backbone');
 var App = require('../../app');
 var Marionette = require('backbone.marionette');
 var template = require('../templates/collab_group_meeting_details.hbs');
+require('bootstrap/modal');
 
 module.exports = Marionette.LayoutView.extend({
   initialize: function () {
@@ -15,6 +16,7 @@ module.exports = Marionette.LayoutView.extend({
   events: {
     'blur [contenteditable]': 'updateMeetingDetails',
     'keydown [contenteditable]': 'updateMeetingDetailsEnter',
+    'click .show-venues': 'showVenues'
   },
   onShow: function () {
     var that = this;
@@ -31,7 +33,7 @@ module.exports = Marionette.LayoutView.extend({
       if (notFired) {
         notFired = false;
       } else {
-        alert('Meeting timing has been changed!');
+        alert('Meeting details have been changed!');
       }
       that.render();
     }, function (errorObject) {
@@ -44,10 +46,14 @@ module.exports = Marionette.LayoutView.extend({
     }
   },
   updateMeetingDetails: function () {
-    console.log('updateMeetingDetails');
-
     this.detailsRef.child('date').set($('.nm-collab-meeting-details-date').html());
     this.detailsRef.child('time').set($('.nm-collab-meeting-details-time').html());
     this.detailsRef.child('venue').set($('.nm-collab-meeting-details-venue').html());
+  },
+  updateMeetingVenue: function (venue) {
+    this.detailsRef.child('venue').set(venue);
+  },
+  showVenues: function () {
+    this.trigger('openVenueSelectionModal');
   }
 });
