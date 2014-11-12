@@ -7,7 +7,11 @@
       <img class="img-rounded" src="http://graph.facebook.com/{{this.fbid}}/picture" width="40" data-placement="bottom" title="{{this.name}}"> &nbsp; 
     {{/each}}
     <hr>
-    <h4>Description</h4>
+    <div class="alert alert-warning">
+      <h5><strong>Next Meeting</strong><h5>
+      Date: <strong>{{meeting.date}}</strong>, <strong>{{meeting.time}}</strong><br>
+      Venue: <strong>{{meeting.venue}}</strong>
+    </div>
     <p>{{description}}</p>
     <a class="btn btn-default btn-block" href="/collab/{{slug}}">View Dashboard</a>
   </div>
