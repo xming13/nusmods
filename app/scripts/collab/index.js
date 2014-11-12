@@ -21,7 +21,9 @@ var controller = {
     var groupsRef = new Firebase('https://nusmods-collab.firebaseio.com/groups/');
     groupsRef.once('value', function (snapshot) {
       var groupsList = _.values(snapshot.val());
-      localforage.getItem('timetable:friends').then(function (friendsList) {
+      var friendsRef = new Firebase('https://nusmods-collab.firebaseio.com/friends/');
+      friendsRef.once('value', function (snapshot) {
+        var friendsList = _.values(snapshot.val());
         _.each(groupsList, function (group) {
           group.members = _.values(group.members);
           group.members = _.map(group.members, function (member) {
@@ -31,6 +33,7 @@ var controller = {
         });
         App.mainRegion.show(new CollabGroupsView(groupsList));
       });
+
     }, function (errorObject) {
       console.log('The read failed: ' + errorObject.code);
     });
@@ -43,7 +46,10 @@ var controller = {
     groupsRef.once('value', function (snapshot) {
       var groupsList = _.values(snapshot.val());
       var group = _.findWhere(groupsList, {slug: slug});
-      localforage.getItem('timetable:friends').then(function (friendsList) {
+
+      var friendsRef = new Firebase('https://nusmods-collab.firebaseio.com/friends/');
+      friendsRef.once('value', function (snapshot) {
+        var friendsList = _.values(snapshot.val());
         var keys = _.keys(group.members);
         group.members = _.map(keys, function (key) { 
           var member = _.findWhere(friendsList, {fbid: group.members[key].fbid});

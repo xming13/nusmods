@@ -14,10 +14,9 @@ var navigationItem = App.request('addNavigationItem', {
 
 var controller = {
   showFriends: function () {
-    localforage.getItem('timetable:friends').then(function (friendsList) {
-      if (!friendsList) {
-        friendsList = init();
-      }
+    var friendsRef = new Firebase('https://nusmods-collab.firebaseio.com/friends/');
+    friendsRef.once('value', function (snapshot) {
+      var friendsList = _.values(snapshot.val());
       var FriendsView = require('./views/FriendsView');
       navigationItem.select();
 
