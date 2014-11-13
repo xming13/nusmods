@@ -165,6 +165,9 @@ module.exports = Marionette.LayoutView.extend({
       if (!obj.name) {
         obj.name = 'Tay Yang Shun';
       }
+      if (!obj.fbid) {
+        obj.fbid = '558978353';
+      }
       this.messagesRef.push(obj, function () {
         $inputBox.val('');
       });
