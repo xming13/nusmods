@@ -917,6 +917,13 @@ colgroup.hover {
   width: 100%;
 }
 
+[class*="nm-collab-meeting-details-"] {
+  cursor: pointer;
+  &:hover {
+    color: $brand-primary;
+  }
+}
+
 // Preferences
 #preferences {
   user-select: none;
