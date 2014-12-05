@@ -1,9 +1,0 @@
----
-dependencies:
-  - bower
-  - bundler
-  - composer
-  - grunt
-  - mysql
-  - nginx
-  - wkhtmltopdf

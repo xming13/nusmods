@@ -1,6 +1,0 @@
----
-- hosts: all
-  sudo: yes
-  roles:
-    - apt-get_update
-    - app_server
