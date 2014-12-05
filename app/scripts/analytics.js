@@ -26,8 +26,8 @@ Backbone.History.prototype.loadUrl = function() {
     gaFragment = '/' + gaFragment;
   }
 
-  ga('set', 'page', gaFragment);
-  ga('send', 'pageview', gaFragment);
+  // ga('set', 'page', gaFragment);
+  // ga('send', 'pageview', gaFragment);
 
   return matched;
 };
@@ -42,10 +42,10 @@ module.exports = {
   },
   set: function () {
     Array.prototype.unshift.call(arguments, 'set');
-    ga.apply(null, arguments);
+    // ga.apply(null, arguments);
   },
   track: function () {
     Array.prototype.unshift.call(arguments, 'send', 'event');
-    ga.apply(null, arguments);
+    // ga.apply(null, arguments);
   }
 };
