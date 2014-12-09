@@ -40,7 +40,7 @@ function drawTree(selector, prereqs, lockedModules, modCode) {
   }
   function clicked (d) {
     if (!isOrAnd(d) && d.name in allMods) {
-      window.location.href = '/modules/' + d.name;
+      window.location.href = '/#modules/' + d.name;
     }
   }
   function resized() {
@@ -301,19 +301,19 @@ module.exports = Marionette.LayoutView.extend({
       });
     }
     
-    (function () {
-      if (typeof disqus_domain !== 'undefined') {
-        DISQUSWIDGETS.domain = 'disqus.com';
-      }
-      DISQUSWIDGETS.forum = disqusShortname;
-      DISQUSWIDGETS.getCount();
-    })();
-    var hash = window.location.hash;
-    window.location.hash = '';
+    // (function () {
+    //   if (typeof disqus_domain !== 'undefined') {
+    //     DISQUSWIDGETS.domain = 'disqus.com';
+    //   }
+    //   DISQUSWIDGETS.forum = disqusShortname;
+    //   DISQUSWIDGETS.getCount();
+    // })();
+    // var hash = window.location.hash;
+    // window.location.hash = '';
 
-    setTimeout(function () {
-      window.location.hash = hash;
-    }, 0);
+    // setTimeout(function () {
+    //   window.location.hash = hash;
+    // }, 0);
   },
   showFullDescription: function () {
     $('.module-desc').addClass('module-desc-more');

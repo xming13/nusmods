@@ -7,7 +7,7 @@ var _ = require('underscore');
 var navigationItem = App.request('addNavigationItem', {
   name: 'Modules',
   icon: 'search',
-  url: '/modules'
+  url: '/#modules'
 });
 
 module.exports = Marionette.Controller.extend({

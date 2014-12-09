@@ -46,7 +46,7 @@ module.exports = Backbone.View.extend({
       // `Backbone.history.navigate` is sufficient for all Routers and will
       // trigger the correct events. The Router's internal `navigate` method
       // calls this anyways.  The fragment is sliced from the root.
-      this.navigateWithScrollTop(href.attr, true);
+      this.navigateWithScrollTop(href.attr.slice(1), true);
     }
   },
 
@@ -86,9 +86,9 @@ module.exports = Backbone.View.extend({
     });
 
     var keyboardNavigationMappings = {
-      t: '/timetable',
-      m: '/modules',
-      p: '/preferences',
+      t: '/#timetable',
+      m: '/#modules',
+      p: '/#preferences',
       '?': '/help'
     };
 
@@ -179,7 +179,7 @@ module.exports = Backbone.View.extend({
 
   navigateWithScrollTop: function (location, trigger) {
     $('body').removeClass('js-toggled');
-    Backbone.history.navigate(location, {trigger: trigger});
+    Backbone.history.navigate(location, {trigger: trigger, replace: true});
     // Hack: Scroll to top of page after navigation
     setTimeout(function () {
       window.scrollTo(0, 0);

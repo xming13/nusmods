@@ -9,7 +9,7 @@ var themeOptions = require('../common/themes/themeOptions.json');
 var navigationItem = App.request('addNavigationItem', {
   name: 'Preferences',
   icon: 'gear',
-  url: '/preferences'
+  url: '/#preferences'
 });
 
 var controller = {

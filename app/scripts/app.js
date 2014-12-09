@@ -154,7 +154,7 @@ App.on('start', function () {
   }).concat([NUSMods.generateModuleCodes()])).then(function () {
     new AppView();
 
-    Backbone.history.start({pushState: true});
+    Backbone.history.start({pushState: false});
   });
 
   localforage.getItem(bookmarkedModulesNamespace, function (modules) {

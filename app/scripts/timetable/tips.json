@@ -18,6 +18,6 @@
     "message": "On a module's page, you can quickly navigate between the various sections using keyboard shortcuts! Press <kbd>E</kbd> to jump to the prerequisities section, <kbd>R</kbd> to jump to the reviews section, <kbd>C</kbd> to jump to the CORS bidding history section and <kbd>S</kbd> to jump to the lesson schedule section."
   },
   {
-    "message": "NUSMods supports many keyboard shortcuts to make usage super easy. Check them out <a class='highlight' href='/help'>here</a>. Press <kbd>?</kbd> and see what happens!"
+    "message": "NUSMods supports many keyboard shortcuts to make usage super easy. Check them out <a class='highlight' href='/#help'>here</a>. Press <kbd>?</kbd> and see what happens!"
   }
 ]

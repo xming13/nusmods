@@ -12,7 +12,7 @@ var config = require('../../common/config');
 var navigationItem = App.request('addNavigationItem', {
   name: 'Timetable',
   icon: 'table',
-  url: '/timetable'
+  url: '/#timetable'
 });
 
 module.exports = Marionette.Controller.extend({
