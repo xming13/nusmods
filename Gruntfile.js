@@ -391,12 +391,6 @@ module.exports = function (grunt) {
             options: {
                 args: ['-cruv']
             },
-            'china': {
-                options: {
-                    src: '<%= yeoman.dist %>/*',
-                    dest: '~/china.nusmods.com'
-                }
-            },
             'nusmods.com': {
                 options: {
                     src: '<%= yeoman.dist %>/*',
