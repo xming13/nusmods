@@ -122,7 +122,7 @@ App.on('start', function () {
   require('./modules');
   require('./venues');
   require('./apps');
-  // require('./friends');
+  require('./friends');
   require('./barenus');
   require('./preferences');
   require('./blog');
