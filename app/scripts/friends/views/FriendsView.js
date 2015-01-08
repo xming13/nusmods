@@ -84,7 +84,8 @@ module.exports = Marionette.LayoutView.extend({
     });
   },
   events: {
-    'click .js-nm-friends-add': 'addFriendTimetable'
+    'click .js-nm-friends-add': 'addFriendTimetable',
+    'click .js-nm-friends-select-all': 'selectAllFriends'
   },
   showSelectedFriendsList: function () {
     this.friendsSelectedListView.render();
@@ -137,6 +138,11 @@ module.exports = Marionette.LayoutView.extend({
       return person.name !== USER_NAME;
     });
     localforage.setItem('timetable:friends', friendsData);
+  },
+  selectAllFriends: function () {
+    _.each(this.friendsListCollection.models, function (person) {
+      person.set('selected', true);
+    });
   },
   updateDisplayedTimetable: function () {
 
