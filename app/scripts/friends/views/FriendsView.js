@@ -184,7 +184,7 @@ module.exports = Marionette.LayoutView.extend({
       }
     });
 
-    if (daysNotGoingToSchool.Saturday !== people.length) {
+    if (daysNotGoingToSchool.Saturday.length === people.length) {
       // By default, hide Saturday if everyone not going on Saturday
       daysNotGoingToSchoolList.splice(5, 1);
     }
