@@ -34,9 +34,7 @@ module.exports = Marionette.LayoutView.extend({
       var friendsListCollection = this.model.collection;
       friendsListCollection.remove(this.model);
       friendsListCollection.trigger('change');
-      var attributes = _.pluck(friendsListCollection.models, 'attributes');
-      var friendsListData = _.pick(attributes, 'name', 'queryString', 'selected', 'semester');
-      localforage.setItem('timetable:friends', friendsListData);
+      friendsListCollection.trigger('save');
     }
   }
 });

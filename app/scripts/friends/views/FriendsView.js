@@ -74,6 +74,18 @@ module.exports = Marionette.LayoutView.extend({
           that.showSelectedFriendsList();
           that.friendsListView.render();
         });
+
+        that.friendsListCollection.on('save', function () {
+          var friendsData = _.pluck(this.models, 'attributes');
+          friendsData = _.map(friendsData, function (person) {
+            return _.omit(person, 'moduleInformation');
+          });
+          // Don't persist current user's information into friend's data.
+          friendsData = _.filter(friendsData, function (person) {
+            return person.name !== USER_NAME;
+          });
+          localforage.setItem('timetable:friends', friendsData);
+        });
       });
     });
 
@@ -129,15 +141,7 @@ module.exports = Marionette.LayoutView.extend({
       queryString: timetableQueryString,
       selected: false
     }));
-    var friendsData = _.pluck(this.friendsListCollection.models, 'attributes');
-    friendsData = _.map(friendsData, function (person) {
-      return _.omit(person, 'moduleInformation');
-    });
-    // Don't persist current user's information into friend's data.
-    friendsData = _.filter(friendsData, function (person) {
-      return person.name !== USER_NAME;
-    });
-    localforage.setItem('timetable:friends', friendsData);
+    this.friendsListCollection.trigger('save');
   },
   selectAllFriends: function () {
     _.each(this.friendsListCollection.models, function (person) {
