@@ -1,7 +1,11 @@
-<a class="js-nm-friends-delete nm-friends-delete">
-  <i class="fa fa-trash-o"></i>
-</a>
-<h5 class="media-heading">
-  <input type="checkbox" class="js-nm-friends-select-checkbox" {{#if selected}}checked{{/if}}> &nbsp; 
-  {{name}}
-</h5>
+<td>
+  <input type="checkbox" class="js-nm-friends-select-checkbox" {{#if selected}}checked{{/if}}>
+</td>
+<td class="nm-friends-name">
+  <h5 class="media-heading">{{name}}</h5>
+</td>
+<td>
+  <a class="js-nm-friends-delete nm-friends-action">
+    <i class="fa fa-trash-o"></i>
+  </a>
+</td>

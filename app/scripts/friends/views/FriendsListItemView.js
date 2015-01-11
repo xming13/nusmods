@@ -5,8 +5,8 @@ var Marionette = require('backbone.marionette');
 var template = require('../templates/friends_list_item.hbs');
 var localforage = require('localforage');
 
-module.exports = Marionette.LayoutView.extend({
-  tagName: 'div',
+module.exports = Marionette.ItemView.extend({
+  tagName: 'tr',
   className: 'media nm-friends-list-item',
   template: template,
   events: {

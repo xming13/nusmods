@@ -9,9 +9,8 @@ var EmptyView = Marionette.ItemView.extend({
   template: template
 });
 
-module.exports = Marionette.CompositeView.extend({
+module.exports = Marionette.CollectionView.extend({
+  tagName: 'tbody',
   childView: FriendsListItemView,
-  childViewContainer: 'div',
-  emptyView: EmptyView,
-  template: _.template('<div></div>')
+  emptyView: EmptyView
 });
