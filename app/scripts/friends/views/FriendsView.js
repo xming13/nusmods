@@ -108,7 +108,7 @@ module.exports = Marionette.LayoutView.extend({
     var timetableUrl = $('#url').val();
     this.getFinalTimetableUrl(timetableUrl, function (data) {
       that.ui.addButton.popover('hide');
-      that.insertFriendTimetableFromUrl(friendName, data.redirectedUrl);
+      that.insertFriendTimetableFromUrl(friendName, data.redirectedUrl, timetableUrl);
     });
   },
   getFinalTimetableUrl: function (timetableUrl, callback) {
@@ -130,14 +130,15 @@ module.exports = Marionette.LayoutView.extend({
       }
     });
   },
-  insertFriendTimetableFromUrl: function (name, timetableUrl) {
-    var urlFragments = timetableUrl.split('/');
+  insertFriendTimetableFromUrl: function (name, redirectedUrl, shortUrl) {
+    var urlFragments = redirectedUrl.split('/');
     var queryFragments = urlFragments.slice(-1)[0].split('?');
     var semester = parseInt(queryFragments[0].slice(3));
     var timetableQueryString = queryFragments[1];
     this.friendsListCollection.add(new FriendModel({
       name: name,
       semester: semester,
+      url: shortUrl,
       queryString: timetableQueryString,
       selected: false
     }));

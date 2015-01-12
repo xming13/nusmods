@@ -1,8 +1,10 @@
 'use strict';
 
+var $ = require('jquery');
 var _ = require('underscore');
 var Marionette = require('backbone.marionette');
 var template = require('../templates/friends_list_item.hbs');
+var editFriendTimetableModalTemplate = require('../templates/friend_edit_modal.hbs');
 var localforage = require('localforage');
 
 module.exports = Marionette.ItemView.extend({
@@ -10,9 +12,22 @@ module.exports = Marionette.ItemView.extend({
   className: 'media nm-friends-list-item',
   template: template,
   events: {
-    'click': 'selectFriend',
+    'click .nm-friends-name': 'selectFriend',
+    'click .js-nm-friends-edit': 'editFriendTimetable',
     'click .js-nm-friends-delete': 'deleteFriendTimetable',
     'change .js-nm-friends-select-checkbox': 'toggleFriendSelection'
+  },
+  onShow: function () {
+    var _this = this;
+    this.$el.find('.js-nm-friends-edit').popover({
+      html: true,
+      container: 'body',
+      placement: 'bottom',
+      content: editFriendTimetableModalTemplate(_this.model.attributes)
+    });
+    $('[data-toggle="popover"]').on('click', function (e) {
+      $('[data-toggle="popover"]').not(this).popover('hide');
+    })
   },
   selectFriend: function () {
     _.each(this.model.collection.models, function (model) {
@@ -25,6 +40,8 @@ module.exports = Marionette.ItemView.extend({
     e.stopPropagation();
     var selected = this.model.get('selected');
     this.model.set('selected', !selected);
+  },
+  editFriendTimetable: function (e) {
   },
   deleteFriendTimetable: function (e) {
     e.preventDefault();
