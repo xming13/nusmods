@@ -135,14 +135,17 @@ module.exports = Marionette.LayoutView.extend({
     var queryFragments = urlFragments.slice(-1)[0].split('?');
     var semester = parseInt(queryFragments[0].slice(3));
     var timetableQueryString = queryFragments[1];
-    this.friendsListCollection.add(new FriendModel({
-      name: name,
+    var newFriend = new FriendModel({
+      name: name || '(no name)',
       semester: semester,
       url: shortUrl,
       queryString: timetableQueryString,
       selected: false
-    }));
-    this.friendsListCollection.trigger('save');
+    });
+    if (newFriend.isValid()) {
+      this.friendsListCollection.add(newFriend);
+      this.friendsListCollection.trigger('save');
+    }
   },
   selectAllFriends: function () {
     _.each(this.friendsListCollection.models, function (person) {
