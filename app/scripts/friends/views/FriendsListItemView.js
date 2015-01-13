@@ -13,6 +13,7 @@ module.exports = Marionette.ItemView.extend({
   template: template,
   events: {
     'click .nm-friends-name': 'selectFriend',
+    'click .js-nm-friends-save': 'saveFriendTimetable',
     'click .js-nm-friends-delete': 'deleteFriendTimetable',
     'change .js-nm-friends-select-checkbox': 'toggleFriendSelection'
   },
@@ -20,15 +21,12 @@ module.exports = Marionette.ItemView.extend({
     var _this = this;
     this.$el.find('.js-nm-friends-edit').popover({
       html: true,
-      container: 'body',
       placement: 'bottom',
       content: editFriendTimetableModalTemplate(_this.model.attributes)
     });
     $('[data-toggle="popover"]').on('click', function (e) {
       $('[data-toggle="popover"]').not(this).popover('hide');
-      $('.js-nm-friends-save').on('click', _this.saveFriendTimetable);
     });
-    
   },
   onBeforeDestroy: function () {
     $('[data-toggle="popover"]').popover('hide');
@@ -46,6 +44,15 @@ module.exports = Marionette.ItemView.extend({
     this.model.set('selected', !selected);
   },
   saveFriendTimetable: function (e) {
+    console.log(this);
+    var friendName = $('#name').val();
+    var originalUrl = $('#url').val();
+    this.model.set({
+      name: friendName,
+      url: originalUrl,
+    });
+    $('[data-toggle="popover"]').popover('hide');
+    this.model.collection.trigger('edit', this.model);
   },
   deleteFriendTimetable: function (e) {
     e.preventDefault();

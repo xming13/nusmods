@@ -67,6 +67,10 @@ module.exports = Marionette.LayoutView.extend({
         that.showSelectedFriendsList();
         that.updateDisplayedTimetable();
 
+        that.friendsListCollection.on('edit', function (oldFriend) {
+          that.updateQueryString(oldFriend, that.updateFriendRecord);
+        });
+
         that.friendsListCollection.on('change', function () {
           var friendsSelectedList = that.friendsListCollection.where({selected: true});
           that.friendsSelectedListView.collection = new Backbone.Collection(friendsSelectedList);
@@ -103,12 +107,28 @@ module.exports = Marionette.LayoutView.extend({
     this.friendsSelectedListView.render();
   },
   addFriendTimetable: function () {
-    var that = this;
     var friendName = $('#name').val();
-    var timetableUrl = $('#url').val();
-    this.getFinalTimetableUrl(timetableUrl, function (data) {
-      that.ui.addButton.popover('hide');
-      that.insertFriendTimetableFromUrl(friendName, data.redirectedUrl, timetableUrl);
+    var originalUrl = $('#url').val();
+    var newFriend = new FriendModel({
+      name: friendName,
+      url: originalUrl,
+      selected: false
+    });
+    this.ui.addButton.popover('hide');
+    this.updateQueryString(newFriend, this.insertFriendTimetableFromUrl);
+  },
+  updateQueryString: function (friend, callback) {
+    var _this = this;
+    this.getFinalTimetableUrl(friend.get('url'), function (data) {
+      var urlFragments = data.redirectedUrl.split('/');
+      var queryFragments = urlFragments.slice(-1)[0].split('?');
+      var semester = parseInt(queryFragments[0].slice(3));
+      var timetableQueryString = queryFragments[1];
+      friend.set({
+        semester: semester,
+        queryString: timetableQueryString,
+      });
+      callback.call(_this, friend);
     });
   },
   getFinalTimetableUrl: function (timetableUrl, callback) {
@@ -130,18 +150,13 @@ module.exports = Marionette.LayoutView.extend({
       }
     });
   },
-  insertFriendTimetableFromUrl: function (name, redirectedUrl, shortUrl) {
-    var urlFragments = redirectedUrl.split('/');
-    var queryFragments = urlFragments.slice(-1)[0].split('?');
-    var semester = parseInt(queryFragments[0].slice(3));
-    var timetableQueryString = queryFragments[1];
-    var newFriend = new FriendModel({
-      name: name,
-      semester: semester,
-      url: shortUrl,
-      queryString: timetableQueryString,
-      selected: false
-    });
+  updateFriendRecord: function (oldFriend) {
+    if (oldFriend.isValid()) {
+      this.friendsListCollection.trigger('change');
+      this.friendsListCollection.trigger('save');
+    }
+  },
+  insertFriendTimetableFromUrl: function (newFriend) {
     if (newFriend.isValid()) {
       this.friendsListCollection.add(newFriend);
       this.friendsListCollection.trigger('save');
