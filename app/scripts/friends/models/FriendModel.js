@@ -9,8 +9,8 @@ var SelectedModulesController = require('../../common/controllers/SelectedModule
 // classes, as class is a keyword in JavaScript.
 module.exports = Backbone.Model.extend({
   validate: function (attributes) {
-    if (attributes.url.length < 1) {
-      return 'url cannot be blank';
+    if (attributes.name.length + attributes.url.length < 1) {
+      return 'record cannot be blank';
     }
   },
   initialize: function () {

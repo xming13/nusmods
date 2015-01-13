@@ -136,7 +136,7 @@ module.exports = Marionette.LayoutView.extend({
     var semester = parseInt(queryFragments[0].slice(3));
     var timetableQueryString = queryFragments[1];
     var newFriend = new FriendModel({
-      name: name || '(no name)',
+      name: name,
       semester: semester,
       url: shortUrl,
       queryString: timetableQueryString,

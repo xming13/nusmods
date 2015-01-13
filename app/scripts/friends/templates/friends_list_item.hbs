@@ -2,7 +2,11 @@
   <input type="checkbox" class="js-nm-friends-select-checkbox" {{#if selected}}checked{{/if}}>
 </td>
 <td class="nm-friends-name">
+  {{#if name}}
   <h5 class="media-heading">{{name}}</h5>
+  {{else}}
+  <h5 class="media-heading text-muted">no name</h5>
+  {{/if}}
 </td>
 <td>
   <a class="js-nm-friends-edit nm-friends-action" data-toggle="popover">
