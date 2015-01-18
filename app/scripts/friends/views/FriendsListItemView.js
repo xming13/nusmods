@@ -44,7 +44,6 @@ module.exports = Marionette.ItemView.extend({
     this.model.set('selected', !selected);
   },
   saveFriendTimetable: function (e) {
-    console.log(this);
     var friendName = $('#name').val();
     var originalUrl = $('#url').val();
     this.model.set({

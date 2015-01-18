@@ -14,6 +14,10 @@ module.exports = Backbone.Model.extend({
     }
   },
   initialize: function () {
+    this.updateModuleInfo();
+    this.on('change:queryString', this.updateModuleInfo);
+  },
+  updateModuleInfo: function () {
     var selectedModules = TimetableModuleCollection.fromQueryStringToJSON(this.get('queryString'));
     // TODO: Change semester
     var that = this;
