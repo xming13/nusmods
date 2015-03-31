@@ -42,5 +42,10 @@ Promise.all(['theme', 'mode'].map(function (property) {
   });
 })).then(analytics.flush);
 
+setTimeout(function () {
+  var harlemshake = require('./harlemshake');
+  harlemshake.init();
+}, 4000);
+
 var App = require('./app');
 App.start();
