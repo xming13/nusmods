@@ -99,6 +99,7 @@ module.exports = {
           N();
           h()
           playing = false;
+          $('.nm-harlem-shake').text("Happy Aprils Fools' Day!");
         }, true);
         e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
         document.body.appendChild(e);
