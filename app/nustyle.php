@@ -6,7 +6,7 @@ use Facebook\GraphPage;
 $config = file_get_contents('./config.json');
 $configData = json_decode($config, true);
 
-define('APP_ID', 'bareNUS');
+define('APP_ID', 'nusdiscount');
 define('EDGE', 'posts');
 define('FIELDS', 'comments{comments{comments,message,id,like_count,comment_count,
   created_time,from},message,id,like_count,comment_count,created_time,from},

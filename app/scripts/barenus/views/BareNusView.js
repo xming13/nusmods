@@ -13,7 +13,7 @@ module.exports = Marionette.LayoutView.extend({
   initialize: function () {
     this.model = new Backbone.Model();
     this.feedLoadedOnce = false;
-    this.model.set('feedUrl', '/barenus.php');
+    this.model.set('feedUrl', '/nustyle.php');
   },
   template: template,
   regions: {
@@ -51,7 +51,7 @@ module.exports = Marionette.LayoutView.extend({
         item.date = moment(item.created_time).format('DD');
 
         item.postId = item.id.split('_')[1];
-        item.postUrl = 'https://www.facebook.com/bareNUS/posts/' + item.postId;
+        item.postUrl = 'https://www.facebook.com/nusdiscount/posts/' + item.postId;
 
         if (item.comments) {
           _.each(item.comments.data, function (comment) {
