@@ -4,7 +4,7 @@ var App = require('../app');
 var Marionette = require('backbone.marionette');
 
 var navigationItem = App.request('addNavigationItem', {
-  name: 'NUSTyle',
+  name: 'NUStyle',
   icon: 'tags',
   url: '/nustyle'
 });
