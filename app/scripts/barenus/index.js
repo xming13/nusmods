@@ -4,9 +4,9 @@ var App = require('../app');
 var Marionette = require('backbone.marionette');
 
 var navigationItem = App.request('addNavigationItem', {
-  name: 'Bare Nusessities',
-  icon: 'photo',
-  url: '/bareNUS'
+  name: 'NUSTyle',
+  icon: 'tags',
+  url: '/nustyle'
 });
 
 var controller = {
@@ -21,7 +21,7 @@ App.addInitializer(function () {
   new Marionette.AppRouter({
     controller: controller,
     appRoutes: {
-      'bareNUS': 'showBareNus'
+      'nustyle': 'showBareNus'
     }
   });
 });
